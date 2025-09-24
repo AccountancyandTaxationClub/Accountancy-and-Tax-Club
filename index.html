@@ -1,170 +1,1138 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accountancy & Taxation Club</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accountancy & Taxation Club</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for consistent theming */
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --success: #4cc9f0;
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* Section Styling */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      background: linear-gradient(90deg, #ffecd2, #fcb69f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      opacity: 0.9;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(30, 60, 114, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(30, 60, 114, 0.98);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--success);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--success);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* About Section */
+    .about-section {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 5px;
+    }
+
+    .about-image {
+      text-align: center;
+    }
+
+    .about-image img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Events Section */
+    .events-section {
+      position: relative;
+    }
+
+    .events-timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .events-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 20px 40px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      color: var(--success);
+      margin-bottom: 10px;
+    }
+
+    .timeline-item:nth-child(odd)::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    /* Activities Section */
+    .activities-section {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .activity-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      transition: var(--transition);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .activity-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .activity-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .activity-card:hover .activity-image img {
+      transform: scale(1.1);
+    }
+
+    .activity-content {
+      padding: 20px;
+    }
+
+    .activity-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .team-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 3px solid var(--success);
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .team-role {
+      color: var(--success);
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .team-social a {
+      color: white;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .team-social a:hover {
+      color: var(--success);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .contact-form {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--success);
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      color: var(--success);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 70px;
+        padding-right: 20px;
+      }
+      
+      .timeline-item::after {
+        left: 30px !important;
+      }
+      
+      .events-timeline::before {
+        left: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-btns {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      section {
+        padding: 60px 0;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="container nav-container">
+        <a href="#" class="logo">Accountancy & Taxation Club</a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Navigation Bar -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">Accountancy & Taxation Club</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#activities">Activities</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h1>Welcome to the Accountancy & Taxation Club</h1>
-        <p>Where numbers meet knowledge — and learning is always in balance.</p>
-        <!-- Replace the link below with your Google Form link -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSflC3oyuQcUkO-G5a6e3I-3E82UY46AsAQmeujOdCJymGyswg/viewform?usp=dialog"
-            class="btn" target="_blank" rel="noopener">Join Us</a>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="about-section">
-        <h2>About Us</h2>
-        <p>
-            The <strong>Accounts and Tax Club</strong> of BK Birla College is a dynamic student-led initiative
-            dedicated to nurturing knowledge, integrity, and professional growth in the field of
-            Accountancy and Taxation. Our club serves as a platform for students to gain practical
-            exposure, develop critical thinking, and strengthen their understanding of commerce
-            and finance.
-        </p>
-        <p>
-            We believe in the power of collaboration and innovation. Through a variety of workshops,
-            seminars, competitions, and interactive sessions, we aim to bridge the gap between
-            We work as a united team
-            where every member’s ideas and contributions are valued. By fostering a culture of
-            trust, respect, and continuous learning
-            academic learning and real-world applications. Our events are designed to inspire
-            curiosity, encourage leadership, and provide opportunities to learn from industry experts.
-        </p>
-
-        <p>
-            Whether you are looking to expand your knowledge, enhance your skills, or simply
-            connect with like-minded peers, the Accounts and Tax Club is the place for you.
-            Together, we are shaping a community that thrives on knowledge, discipline,
-            and excellence.
-        </p>
-    </section>
-
-
-    <!-- Events Section -->
-    <section id="events" class="events-section">
-        <h2>Event Calendar</h2>
-        <!-- Simple Drive link (replace with your own) -->
-        <p><a href="https://drive.google.com/YOUR_EXCEL_LINK" target="_blank">📅 View our Event Calendar</a></p>
-    </section>
-
-    <!-- Activities Section -->
-    <section id="activities" class="activities-section">
-        <h2>Our Activities</h2>
-        <div class="gallery">
-            <img src="Images/activity1.jpg" alt="Activity 1">
-            <img src="Images/activity2.jpg" alt="Activity 2">
-            <img src="Images/activity3.jpg" alt="Activity 3">
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Welcome to the Accountancy & Taxation Club</h1>
+        <p class="hero-subtitle">Where numbers meet knowledge — and learning is always in balance.</p>
+        <div class="hero-btns">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSflC3oyuQcUkO-G5a6e3I-3E82UY46AsAQmeujOdCJymGyswg/viewform?usp=dialog" 
+             class="btn btn-primary" target="_blank" rel="noopener">Join Us Now</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Core Team Section -->
-    <section id="team" class="team-section">
-        <h2>Meet Our Core Team</h2>
-        <div class="team-container">
-
-            <div class="team-member">
-                <img src="Images/pranit.jpg" alt="Pranit More">
-                <h3>Pranit More</h3>
-                <p>President</p>
+  <!-- About Us Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-subtitle">Discover our mission, values, and the impact we're making in the field of accountancy and taxation.</p>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <p>The <strong>Accounts and Tax Club</strong> of BK Birla College is a dynamic student-led initiative dedicated to nurturing knowledge, integrity, and professional growth in the field of Accountancy and Taxation.</p>
+          <p>We believe in the power of collaboration and innovation. Through a variety of workshops, seminars, competitions, and interactive sessions, we aim to bridge the gap between academic learning and real-world applications.</p>
+          <p>Whether you are looking to expand your knowledge, enhance your skills, or connect with like-minded peers, the Accounts and Tax Club is the place for you.</p>
+          
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">Members</div>
             </div>
-
-            <div class="team-member">
-                <img src="Images/Khushi.jpg" alt="Khushi Tiwari">
-                <h3>Khushi Tiwari</h3>
-                <p>Vice President</p>
+            <div class="stat-item">
+              <div class="stat-number">15+</div>
+              <div class="stat-label">Events</div>
             </div>
-
-            <div class="team-member">
-                <img src="Images/Gokul.jpg" alt="Gokul Nair">
-                <h3>Gokul Nair</h3>
-                <p>Secretary</p>
+            <div class="stat-item">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Years</div>
             </div>
-
-            <div class="team-member">
-                <img src="Images/muskan.jpg" alt="Muskan Ismail">
-                <h3>Muskan Ismail</h3>
-                <p>First Year Representative</p>
-            </div>
-
-            <div class="team-member">
-                <img src="Images/neha.jpg" alt="Neha Mishra">
-                <h3>Neha Mishra</h3>
-                <p>Second Year Representative</p>
-            </div>
-
-            <div class="team-member">
-                <img src="Images/Prithvi.jpg" alt="Prithvi Shetty">
-                <h3>Prithvi Shetty</h3>
-                <p>Third Year Representative</p>
-            </div>
-
-            <div class="team-member">
-                <img src="Images/Gaurav.jpg" alt="Gaurav Unde">
-                <h3>Gaurav Unde</h3>
-                <p>Secretary Team Member</p>
-            </div>
-
-            <div class="team-member">
-                <img src="Images/Rushikesh.jpg" alt="Rushikesh Sangle">
-                <h3>Rushikesh Sangle</h3>
-                <p>Secretary Team Member</p>
-            </div>
-
+          </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2>Contact Us</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Club Office Bearers</h3>
-                <p><strong>President:</strong> Pranit More – <a href="tel:9594019339">9594019339</a></p>
-                <p><strong>Vice President:</strong> Khushi Tiwari – <a href="tel:9082430313">9082430313</a></p>
-                <p><strong>Secretary:</strong> Gokul Nair – <a href="tel:9970456303">9970456303</a></p>
-
-                <h3>Official Email</h3>
-                <p><a href="mailto:bkbck.accandtax@gmail.com">bkbck.accandtax@gmail.com</a></p>
-
-                <h3>Club Address</h3>
-                <p>BK Birla College of Arts, Science & Commerce,<br>
-                    Kalyan (West), Maharashtra - 421304</p>
-
-                <h3>Instagram</h3>
-                <p><a href="https://www.instagram.com/accounts.taxclub.bkbc?utm_source=ig_web_button_share_sheet&igsh=MWN4OHU2eTBmYW82ZQ=="
-                        target="_blank" rel="noopener">Visit our Instagram</a></p>
-
-            </div>
+        
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Club Activity">
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Accountancy & Taxation Club | BK Birla College, Kalyan</p>
-    </footer>
+  <!-- Events Section -->
+  <section id="events" class="events-section">
+    <div class="container">
+      <h2 class="section-title">Event Calendar</h2>
+      <p class="section-subtitle">Stay updated with our upcoming events, workshops, and seminars.</p>
+      
+      <div class="events-timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">October 15, 2023</div>
+            <h3>Tax Planning Workshop</h3>
+            <p>Learn effective tax planning strategies for individuals and businesses.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">November 5, 2023</div>
+            <h3>Financial Literacy Seminar</h3>
+            <p>Understanding the basics of financial management and investment.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">December 10, 2023</div>
+            <h3>Annual Accounting Competition</h3>
+            <p>Test your accounting skills in our annual inter-college competition.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">January 20, 2024</div>
+            <h3>Career Guidance Session</h3>
+            <p>Interact with industry professionals and explore career opportunities.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://drive.google.com/YOUR_EXCEL_LINK" class="btn btn-primary" target="_blank">View Full Calendar</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- Activities Section -->
+  <section id="activities" class="activities-section">
+    <div class="container">
+      <h2 class="section-title">Our Activities</h2>
+      <p class="section-subtitle">Explore the diverse range of activities we organize throughout the year.</p>
+      
+      <div class="activities-grid">
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workshop">
+          </div>
+          <div class="activity-content">
+            <h3 class="activity-title">Interactive Workshops</h3>
+            <p>Hands-on sessions on accounting software, tax filing, and financial analysis.</p>
+          </div>
+        </div>
+        
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Seminar">
+          </div>
+          <div class="activity-content">
+            <h3 class="activity-title">Expert Seminars</h3>
+            <p>Learn from industry professionals about the latest trends and practices.</p>
+          </div>
+        </div>
+        
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Competition">
+          </div>
+          <div class="activity-content">
+            <h3 class="activity-title">Accounting Competitions</h3>
+            <p>Test your skills and compete with peers in various accounting challenges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Team Section -->
+  <section id="team" class="team-section">
+    <div class="container">
+      <h2 class="section-title">Meet Our Core Team</h2>
+      <p class="section-subtitle">The passionate individuals who drive our club's initiatives and activities.</p>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/pranit.jpg" alt="Pranit More">
+          </div>
+          <h3 class="team-name">Pranit More</h3>
+          <p class="team-role">President</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/Khushi.jpg" alt="Khushi Tiwari">
+          </div>
+          <h3 class="team-name">Khushi Tiwari</h3>
+          <p class="team-role">Vice President</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/Gokul.jpg" alt="Gokul Nair">
+          </div>
+          <h3 class="team-name">Gokul Nair</h3>
+          <p class="team-role">Secretary</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/muskan.jpg" alt="Muskan Ismail">
+          </div>
+          <h3 class="team-name">Muskan Ismail</h3>
+          <p class="team-role">First Year Representative</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/neha.jpg" alt="Neha Mishra">
+          </div>
+          <h3 class="team-name">Neha Mishra</h3>
+          <p class="team-role">Second Year Representative</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Images/Prithvi.jpg" alt="Prithvi Shetty">
+          </div>
+          <h3 class="team-name">Prithvi Shetty</h3>
+          <p class="team-role">Third Year Representative</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-subtitle">Get in touch with us for any queries or to join our club.</p>
+      
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h3>Club Address</h3>
+              <p>BK Birla College of Arts, Science & Commerce,<br>Kalyan (West), Maharashtra - 421304</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h3>Official Email</h3>
+              <p><a href="mailto:bkbck.accandtax@gmail.com">bkbck.accandtax@gmail.com</a></p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <h3>Phone Numbers</h3>
+              <p><strong>President:</strong> <a href="tel:9594019339">9594019339</a><br>
+                 <strong>Vice President:</strong> <a href="tel:9082430313">9082430313</a><br>
+                 <strong>Secretary:</strong> <a href="tel:9970456303">9970456303</a></p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div>
+              <h3>Instagram</h3>
+              <p><a href="https://www.instagram.com/accounts.taxclub.bkbc" target="_blank" rel="noopener">@accounts.taxclub.bkbc</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h3>Send us a Message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">Accountancy & Taxation Club</div>
+          <p>Where numbers meet knowledge — and learning is always in balance.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/accounts.taxclub.bkbc" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Event Calendar</a></li>
+            <li><a href="#">Photo Gallery</a></li>
+            <li><a href="#">Study Materials</a></li>
+            <li><a href="#">Career Guidance</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> BK Birla College, Kalyan</li>
+            <li><i class="fas fa-envelope"></i> bkbck.accandtax@gmail.com</li>
+            <li><i class="fas fa-phone"></i> +91 9594019339</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2023 Accountancy & Taxation Club | BK Birla College, Kalyan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Form submission
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      contactForm.reset();
+    });
+
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.timeline-item, .activity-card, .team-card').forEach(el => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
 </body>
-
 </html>
